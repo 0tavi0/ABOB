@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="81dp">
+
+
+    <TextView
+            android:id="@+id/txtTitulo"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alimentos que ajudam no compate cotra câncer"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="15dp" app:layout_constraintBottom_toTopOf="@+id/urlImg"/>
+
+    <ImageView
+            android:id="@+id/urlImg"
+            android:layout_width="wrap_content"
+            android:layout_height="158dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/imagem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtSubtitulo"/>
+
+    <TextView
+            android:id="@+id/txtSubtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Novos estudos indicam, que novos alimentoss.."
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/urlImg"/>
+</android.support.constraint.ConstraintLayout>
+
+

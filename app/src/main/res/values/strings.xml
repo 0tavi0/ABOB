@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ABOB</string>
+    <string name="nav_feed">Home</string>
+    <string name="nav_videos">Videos</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

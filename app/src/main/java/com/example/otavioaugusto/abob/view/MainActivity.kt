@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), FeedContrato.View {
 
+
+
     lateinit var feedPresenter: FeedContrato.FeedPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity(), FeedContrato.View {
 
         feedPresenter = FeedPresenter(this)
 
-        recycler.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager?
+        recycler.layoutManager = LinearLayoutManager(this)
         recycler.setHasFixedSize(true)
         feedPresenter.obterListaDoFeed()
 

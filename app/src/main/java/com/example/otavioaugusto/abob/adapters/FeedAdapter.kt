@@ -1,17 +1,24 @@
 package com.example.otavioaugusto.abob.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.example.otavioaugusto.abob.R
+import com.example.otavioaugusto.abob.interfaces.FeedContrato
 import com.example.otavioaugusto.abob.interfaces.ItemClickListener
 import com.example.otavioaugusto.abob.model.Feed
+import com.example.otavioaugusto.abob.presenter.FeedPresenter
 
 class FeedAdapter(val listaFeed: ArrayList<Feed>, val context: Context) : RecyclerView.Adapter<FeedAdapter.ViewHolder>()  {
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_feed, parent, false)
@@ -30,9 +37,13 @@ class FeedAdapter(val listaFeed: ArrayList<Feed>, val context: Context) : Recycl
         holder.txtSubtitulo.text = listaFeed[position].subtitulo
 
         holder.setOnCustomItemClickListener(object : ItemClickListener{
-            override fun onCustomClickListener(view: View, position: Int) {
-                Toast.makeText(context,"${listaFeed[position]}",Toast.LENGTH_LONG).show()
+            override fun onCustomClick(view: View, position: Int, titulo: TextView, subtitulo: TextView) {
+
+                FeedPresenter.passarDadoIntent(listaFeed[position].titulo,listaFeed[position].subtitulo, context )
+
+
             }
+
 
         })
     }
@@ -56,7 +67,7 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnCli
     }
 
     override fun onClick(v: View?) {
-        this.customClickItem!!.onCustomClickListener(v!!,adapterPosition)
+        this.customClickItem!!.onCustomClick(v!!,adapterPosition, txtTitulo,txtSubtitulo)
 
     }
 }

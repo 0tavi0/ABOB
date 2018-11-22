@@ -1,10 +1,11 @@
-package com.example.otavioaugusto.abob
+package com.example.otavioaugusto.abob.view
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.adapters.FeedAdapter
 import com.example.otavioaugusto.abob.interfaces.FeedContrato
 import com.example.otavioaugusto.abob.model.Feed

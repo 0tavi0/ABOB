@@ -11,7 +11,7 @@ import com.example.otavioaugusto.abob.model.Feed
 import com.example.otavioaugusto.abob.view.FeedDetails
 
 class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
-    
+
     override fun obterListaDoFeed() {
         val lista = arrayListOf<Feed>()
         for (i in 1..10){

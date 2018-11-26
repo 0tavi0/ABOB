@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "320150901483",
+    "firebase_url": "https://abob-ed462.firebaseio.com",
+    "project_id": "abob-ed462",
+    "storage_bucket": "abob-ed462.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320150901483:android:4f457acba1f07813",
+        "android_client_info": {
+          "package_name": "com.example.otavioaugusto.abob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320150901483-dggq948tovd091r5v39sc38ueqi1dpao.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.otavioaugusto.abob",
+            "certificate_hash": "01ae946640778852bef8b1c6cfe7d7e7a078e484"
+          }
+        },
+        {
+          "client_id": "320150901483-dtgoc5qsoguta4jpkjaut097852c5jpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsQ9tG92RdiN-hVfoV9qczjVxnv_LZ1I0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320150901483-dtgoc5qsoguta4jpkjaut097852c5jpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

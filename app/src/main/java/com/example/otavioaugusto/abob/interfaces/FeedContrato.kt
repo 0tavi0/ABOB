@@ -5,11 +5,12 @@ import com.example.otavioaugusto.abob.model.Feed
 interface FeedContrato {
 
     interface View{
-        fun mostrarLista(lista : ArrayList<Feed>)
+        fun mostrarErroFirebase(m : String)
+        fun mostrarListaFirebase(lista: ArrayList<Feed>)
     }
 
     interface FeedPresenter{
-        fun obterListaDoFeed()
+        fun obterFeedFireabase()
 
     }
 

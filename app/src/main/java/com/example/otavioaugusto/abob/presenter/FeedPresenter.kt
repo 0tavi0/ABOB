@@ -9,25 +9,37 @@ import com.example.otavioaugusto.abob.interfaces.FeedContrato
 import com.example.otavioaugusto.abob.interfaces.ItemClickListener
 import com.example.otavioaugusto.abob.model.Feed
 import com.example.otavioaugusto.abob.view.FeedDetails
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
 
-    override fun obterListaDoFeed() {
-        val lista = arrayListOf<Feed>()
-        for (i in 1..10){
-            var f1 = Feed("Alimentos que ajudam no compate cotra câncer",
-                "Novos estudos indicam, que novos alimentoss..")
-            lista.add(f1)
-        }
+   lateinit var listaFeed: ArrayList<Feed>
 
-        var f2 = Feed("cancer",
-            " indicam, que novos alimentoss..")
-        lista.add(f2)
+    override fun obterFeedFireabase() {
 
-        view.mostrarLista(lista)
+        listaFeed = ArrayList()
+        val ref = FirebaseDatabase.getInstance().getReference("feed")
+        ref.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                view.mostrarErroFirebase(p0.message)
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0!!.exists()){
+                    listaFeed.clear()
+                    for (feed in p0.children){
+                        var feed = feed.getValue(Feed::class.java)
+                        listaFeed.add(feed!!)
+                        view.mostrarListaFirebase(listaFeed)
+                    }
+                }
 
+            }
+
+        })
     }
-
     companion object {
         fun passarDadoIntent(titulo:String, subtitulo:String, contexto: Context){
             val intent = Intent(contexto, FeedDetails::class.java)
@@ -35,9 +47,5 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
             intent.putExtra("subtitulo",subtitulo)
             contexto.startActivity(intent)
         }
-
     }
-
-
-
 }

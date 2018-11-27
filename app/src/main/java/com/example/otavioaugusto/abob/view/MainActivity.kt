@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.widget.Toast
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.adapters.FeedAdapter
 import com.example.otavioaugusto.abob.interfaces.FeedContrato
@@ -21,7 +22,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), FeedContrato.View {
 
 
-
     lateinit var feedPresenter: FeedContrato.FeedPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,59 +32,18 @@ class MainActivity : AppCompatActivity(), FeedContrato.View {
 
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.setHasFixedSize(true)
-        feedPresenter.obterListaDoFeed()
+
+        feedPresenter.obterFeedFireabase()
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-
-        saveFirebase()
-        recuperarDataFirebase()
-
+        
     }
 
 
-    override fun mostrarLista(lista: ArrayList<Feed>) {
+    override fun mostrarListaFirebase(lista: ArrayList<Feed>) {
         val adapter = FeedAdapter(lista, this)
         recycler.adapter = adapter
-
     }
-
-    fun saveFirebase (){
-        val ref = FirebaseDatabase.getInstance().getReference("feed")
-        val idFeed = ref.push().key
-
-        val feed = Feed("Titulo da postagem", "Subtitulo da postagem")
-        feed.id = idFeed.toString()
-
-        ref.child(idFeed!!).setValue(feed).addOnCompleteListener {
-            Log.e("Salvo", "Completo")
-        }
-    }
-
-    fun recuperarDataFirebase(){
-        val ref = FirebaseDatabase.getInstance().getReference("feed")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                Log.e("Erro", "${p0.message}")
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-
-                if (p0!!.exists()){
-                    for (e in p0.children){
-                        val feed = e.getValue(Feed::class.java)
-
-                        Log.e("feed", "${feed?.titulo}")
-
-                    }
-                }
-
-            }
-
-        })
-    }
-
-
 
 
 
@@ -105,4 +64,24 @@ class MainActivity : AppCompatActivity(), FeedContrato.View {
         }
         false
     }
+
+
+    override fun mostrarErroFirebase(m: String) {
+        Toast.makeText(this, m, Toast.LENGTH_LONG)
+    }
+
+    fun saveFirebase (){
+        val ref = FirebaseDatabase.getInstance().getReference("feed")
+        val idFeed = ref.push().key
+
+        val feed = Feed("Titulo da postagem", "Subtitulo da postagem")
+        feed.id = idFeed.toString()
+
+        ref.child(idFeed!!).setValue(feed).addOnCompleteListener {
+            Log.e("Salvo", "Completo")
+        }
+    }
+
+
+
 }

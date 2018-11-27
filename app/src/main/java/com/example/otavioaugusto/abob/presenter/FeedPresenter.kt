@@ -19,6 +19,11 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
                 "Novos estudos indicam, que novos alimentoss..")
             lista.add(f1)
         }
+
+        var f2 = Feed("cancer",
+            " indicam, que novos alimentoss..")
+        lista.add(f2)
+
         view.mostrarLista(lista)
 
     }

@@ -2,11 +2,13 @@ package com.example.otavioaugusto.abob.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.otavioaugusto.abob.R
@@ -14,6 +16,7 @@ import com.example.otavioaugusto.abob.interfaces.FeedContrato
 import com.example.otavioaugusto.abob.interfaces.ItemClickListener
 import com.example.otavioaugusto.abob.model.Feed
 import com.example.otavioaugusto.abob.presenter.FeedPresenter
+import com.squareup.picasso.Picasso
 
 class FeedAdapter(val listaFeed: ArrayList<Feed>, val context: Context) : RecyclerView.Adapter<FeedAdapter.ViewHolder>()  {
 
@@ -36,15 +39,15 @@ class FeedAdapter(val listaFeed: ArrayList<Feed>, val context: Context) : Recycl
         holder.txtTitulo.text = listaFeed[position].titulo
         holder.txtSubtitulo.text = listaFeed[position].subtitulo
 
+        Picasso
+            .get()
+            .load(Uri.parse(listaFeed[position].urlImagem))
+            .into(holder.img)
+
         holder.setOnCustomItemClickListener(object : ItemClickListener{
             override fun onCustomClick(view: View, position: Int, titulo: TextView, subtitulo: TextView) {
-
                 FeedPresenter.passarDadoIntent(listaFeed[position].titulo,listaFeed[position].subtitulo, context )
-
-
             }
-
-
         })
     }
 
@@ -54,11 +57,14 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnCli
 
     val txtTitulo : TextView
     val txtSubtitulo : TextView
+    val img: ImageView
     var customClickItem : ItemClickListener? = null
+
 
     init {
         txtTitulo = itemView.findViewById(R.id.txtTitulo)
         txtSubtitulo = itemView.findViewById(R.id.txtSubtitulo)
+        img = itemView.findViewById(R.id.urlImg)
         itemView.setOnClickListener(this)
     }
 

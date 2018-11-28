@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_feed.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.URI
 
 class MainActivity : AppCompatActivity(), FeedContrato.View {
 
@@ -35,8 +36,9 @@ class MainActivity : AppCompatActivity(), FeedContrato.View {
 
         feedPresenter.obterFeedFireabase()
 
+        saveFirebase()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        
+
     }
 
 
@@ -74,7 +76,9 @@ class MainActivity : AppCompatActivity(), FeedContrato.View {
         val ref = FirebaseDatabase.getInstance().getReference("feed")
         val idFeed = ref.push().key
 
-        val feed = Feed("Titulo da postagem", "Subtitulo da postagem")
+
+        val feed = Feed("Titulo da postagem", "Subtitulo da postagem", resources.getString(R.string.large_text))
+        feed.urlImagem = "https://s2.glbimg.com/WelpMHIiVPuN3LqjQOFP4t4j8fQ=/32x129:1024x683/640x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/3/3/tq59WuThiQAazKciL2Gg/whatsapp-image-2018-11-27-at-09.36.43.jpeg"
         feed.id = idFeed.toString()
 
         ref.child(idFeed!!).setValue(feed).addOnCompleteListener {

@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.otavioaugusto.abob.R
+import com.example.otavioaugusto.abob.presenter.FeedPresenter
 import kotlinx.android.synthetic.main.activity_feed_details.*
 import kotlinx.android.synthetic.main.content_feed_details.*
 
@@ -17,11 +18,17 @@ class FeedDetails : AppCompatActivity() {
 
 
 
+
         var intent = intent
         val titulo = intent.getStringExtra("titulo")
         val subtitulo = intent.getStringExtra("subtitulo")
+        val descricao = intent.getStringExtra("descricao")
+        val urlImg = intent.getStringExtra("img")
 
-        txtDetailsSubtitulo.setText(subtitulo)
+        txtDetailsSubtitulo.setText(descricao)
+
+        FeedPresenter.picassoImagem(urlImg, imgCollapsing)
+
         setTitle(titulo)
 
 

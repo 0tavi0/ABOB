@@ -2,7 +2,9 @@ package com.example.otavioaugusto.abob.presenter
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.interfaces.FeedContrato
@@ -13,6 +15,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 
 class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
 
@@ -41,11 +44,21 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
         })
     }
     companion object {
-        fun passarDadoIntent(titulo:String, subtitulo:String, contexto: Context){
+        fun passarDadoIntent(titulo:String, subtitulo:String, descricao:String, img:String, contexto: Context){
             val intent = Intent(contexto, FeedDetails::class.java)
             intent.putExtra("titulo", titulo)
             intent.putExtra("subtitulo",subtitulo)
+            intent.putExtra("descricao", descricao)
+            intent.putExtra("img", img)
             contexto.startActivity(intent)
+        }
+
+        fun picassoImagem(url:String, imgView:ImageView){
+            Picasso
+                .get()
+                .load(Uri.parse(url))
+                .into(imgView)
+
         }
     }
 }

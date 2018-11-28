@@ -39,14 +39,12 @@ class FeedAdapter(val listaFeed: ArrayList<Feed>, val context: Context) : Recycl
         holder.txtTitulo.text = listaFeed[position].titulo
         holder.txtSubtitulo.text = listaFeed[position].subtitulo
 
-        Picasso
-            .get()
-            .load(Uri.parse(listaFeed[position].urlImagem))
-            .into(holder.img)
+        FeedPresenter.picassoImagem(listaFeed[position].urlImagem, holder.img)
 
         holder.setOnCustomItemClickListener(object : ItemClickListener{
             override fun onCustomClick(view: View, position: Int, titulo: TextView, subtitulo: TextView) {
-                FeedPresenter.passarDadoIntent(listaFeed[position].titulo,listaFeed[position].subtitulo, context )
+                FeedPresenter.passarDadoIntent(listaFeed[position].titulo,listaFeed[position].subtitulo,
+                    listaFeed[position].descricao, listaFeed[position].urlImagem, context )
             }
         })
     }

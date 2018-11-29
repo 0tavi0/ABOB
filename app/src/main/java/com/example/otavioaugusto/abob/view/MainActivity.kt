@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity(), FeedContrato.View {
 
         feedPresenter.obterFeedFireabase()
 
-        saveFirebase()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }

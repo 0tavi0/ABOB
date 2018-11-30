@@ -3,19 +3,28 @@ package com.example.otavioaugusto.abob.presenter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.otavioaugusto.abob.R
+import com.example.otavioaugusto.abob.interfaces.ApiInterface
 import com.example.otavioaugusto.abob.interfaces.FeedContrato
 import com.example.otavioaugusto.abob.interfaces.ItemClickListener
 import com.example.otavioaugusto.abob.model.Feed
+import com.example.otavioaugusto.abob.model.YoutubeDataModel
+import com.example.otavioaugusto.abob.utils.YoutubeConfig
 import com.example.otavioaugusto.abob.view.FeedDetails
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
 
@@ -60,5 +69,6 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
                 .into(imgView)
 
         }
+
     }
 }

@@ -21,8 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URI
 
 class MainActivity : AppCompatActivity(), FeedContrato.View {
-
-
+    
     lateinit var feedPresenter: FeedContrato.FeedPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {

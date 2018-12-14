@@ -1,6 +1,8 @@
 package com.example.otavioaugusto.abob.presenter
 
+import android.net.Uri
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.otavioaugusto.abob.interfaces.ApiInterface
 import com.example.otavioaugusto.abob.interfaces.FeedContrato
@@ -10,6 +12,7 @@ import com.example.otavioaugusto.abob.model.YoutubeDataModel
 import com.example.otavioaugusto.abob.model.YoutubeResponse
 import com.example.otavioaugusto.abob.utils.RetrofitService
 import com.example.otavioaugusto.abob.utils.YoutubeConfig
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,5 +58,16 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
                 }
             }
         })
+    }
+
+
+    companion object {
+        fun picassoImagem(url:String, imgView: ImageView){
+            Picasso
+                .get()
+                .load(Uri.parse(url))
+                .into(imgView)
+
+        }
     }
 }

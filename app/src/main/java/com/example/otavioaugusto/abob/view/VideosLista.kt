@@ -34,10 +34,10 @@ class VideosLista : AppCompatActivity(), VideosListaContrato.View {
         val adapter = VideosAdapter(listaYoutubeModel, this)
         recyclerVideos.adapter = adapter
 
-        for (i in listaYoutubeModel){
-            Log.e("Imagem", "${i.urlImagem}")
-
-        }
+//        for (i in listaYoutubeModel){
+//            Log.e("Imagem", "${i.title}")
+//
+//        }
 
     }
 

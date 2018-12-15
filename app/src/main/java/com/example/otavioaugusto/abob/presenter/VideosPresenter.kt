@@ -1,5 +1,7 @@
 package com.example.otavioaugusto.abob.presenter
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
@@ -12,6 +14,8 @@ import com.example.otavioaugusto.abob.model.YoutubeDataModel
 import com.example.otavioaugusto.abob.model.YoutubeResponse
 import com.example.otavioaugusto.abob.utils.RetrofitService
 import com.example.otavioaugusto.abob.utils.YoutubeConfig
+import com.example.otavioaugusto.abob.view.FeedDetails
+import com.example.otavioaugusto.abob.view.VideoDetails
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,8 +47,9 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
 
                         var urlImagem = i.youtubeModel.thumbnails.thumbnailsHigh.urlImagem
                         var idVide = i.youtubeModel.video_id.urlIDvideos
+                        var title = i.youtubeModel.title
 
-                        var videoYoutube = VideoYoutube(urlImagem, idVide)
+                        var videoYoutube = VideoYoutube(urlImagem, idVide,title)
 
                         listaDadosYoutube.add(videoYoutube)
 
@@ -68,6 +73,12 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
                 .load(Uri.parse(url))
                 .into(imgView)
 
+        }
+
+        fun passarDadoIntent(id:String, contexto: Context){
+            val intent = Intent(contexto, VideoDetails::class.java)
+            intent.putExtra("id", id)
+            contexto.startActivity(intent)
         }
     }
 }

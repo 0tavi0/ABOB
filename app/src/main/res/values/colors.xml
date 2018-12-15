@@ -3,6 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="backgraoundTextview">#79434141</color>
+    <color name="backgraoundTextview">#51686868</color>
 
 </resources>

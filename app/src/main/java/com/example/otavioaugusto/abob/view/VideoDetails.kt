@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class VideoDetails :  YouTubeBaseActivity() {
 
     lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
+    lateinit var id:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,45 +30,16 @@ class VideoDetails :  YouTubeBaseActivity() {
 
 
         initUI()
-//
-//
-//        var call = RetrofitService
-//            .retrofit.create(ApiInterface::class.java)
-//            .getYoutubeData(PLAYLIST_ID,GOOGLE_YOUTUBE_API_KEY)
-//
-//        call.enqueue(object : Callback<YoutubeResponse>{
-//            override fun onFailure(call: Call<YoutubeResponse>, t: Throwable) {
-//                Log.e("errro desgracaaa", "${t.message}")
-//            }
-//
-//            override fun onResponse(call: Call<YoutubeResponse>, response: Response<YoutubeResponse>) {
-//
-//                if (response.isSuccessful) {
-//                    var listaYoutube = response.body()!!.lista
-//                    for (i in listaYoutube){
-//                        Log.e("URLIMagem", "${i.youtubeModel.thumbnails.thumbnailsHigh.urlImagem}")
-//                        Log.e("URLIDVIdeo", "${i.youtubeModel.video_id.urlIDvideos}")
-//
-//                    }
-//
-//                }else{
-//                    Toast.makeText(baseContext, "${response.code()}",Toast.LENGTH_LONG)
-//                    Log.e("fora", ""+response.code())
-//
-//                }
-//
-//
-//
-//            }
-//        })
 
+        var intent = intent
+        id = intent.getStringExtra("id")
 
     }
 
     fun initUI(){
         youtubePlayerInit = object : YouTubePlayer.OnInitializedListener{
             override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, p1: YouTubePlayer?, p2: Boolean) {
-                p1!!.loadPlaylist(YoutubeConfig.getIDPlaylist())
+                p1!!.loadVideo(id)
             }
 
             override fun onInitializationFailure(p0: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {

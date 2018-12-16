@@ -33,7 +33,8 @@ class VideosAdapter(val listaVideos: List<VideoYoutube>, val context: Context): 
         holder.setOnCustomItemClickListener(object : ItemClickListener.clickVideo {
             override fun onClickVideos(view: View, position: Int) {
 
-                VideosPresenter.passarDadoIntent(listaVideos[position].IdVideo, context)
+                VideosPresenter.passarDadoIntent(listaVideos[position].IdVideo,
+                    listaVideos[position].description, listaVideos[position].title, context)
                 Log.e("item", "${position}")
                 Log.e("nome", "${listaVideos[position].IdVideo}")
 

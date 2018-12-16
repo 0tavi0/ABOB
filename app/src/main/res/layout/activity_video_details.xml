@@ -9,11 +9,42 @@
 
     <com.google.android.youtube.player.YouTubePlayerView
             android:id="@+id/playerYoutube"
-            android:layout_width="356dp"
-            android:layout_height="236dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-            android:layout_marginEnd="12dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="354dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:ignore="MissingConstraints"
             app:layout_constraintTop_toTopOf="parent">
 
     </com.google.android.youtube.player.YouTubePlayerView>
+
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:id="@+id/txt_itemTitle_videoDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/playerYoutube"
+            android:layout_marginStart="10dp"
+    />
+    <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnShare" android:background="@drawable/iconshare"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/playerYoutube"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="10dp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_itemDescrVideoDetails"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp" app:layout_constraintTop_toBottomOf="@+id/txt_itemTitle_videoDetails"/>
+
+
 </android.support.constraint.ConstraintLayout>

@@ -1,42 +1,51 @@
 package com.example.otavioaugusto.abob.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.widget.Button
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.utils.YoutubeConfig
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import kotlinx.android.synthetic.main.activity_video_details.*
-import com.example.otavioaugusto.abob.interfaces.ApiInterface
-import com.example.otavioaugusto.abob.model.YoutubeResponse
-import com.example.otavioaugusto.abob.utils.RetrofitService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class VideoDetails :  YouTubeBaseActivity() {
 
     lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
     lateinit var id:String
+    lateinit var description:String
+    lateinit var title:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_details)
 
 
-        initUI()
 
-        var intent = intent
-        id = intent.getStringExtra("id")
+        showVideo()
+        dadosIntent()
+
+
+
+        btnShare.setOnClickListener {
+
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND_MULTIPLE
+               // putExtra(Intent.EXTRA_TEXT, titleShared)
+                putExtra(Intent.EXTRA_TEXT, "https://www.youtube.com/watch?v=" + id)
+                type = "text/plain"
+            }
+            startActivity(sendIntent)
+        }
 
     }
 
-    fun initUI(){
+
+
+    fun showVideo(){
         youtubePlayerInit = object : YouTubePlayer.OnInitializedListener{
             override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, p1: YouTubePlayer?, p2: Boolean) {
                 p1!!.loadVideo(id)
@@ -50,6 +59,21 @@ class VideoDetails :  YouTubeBaseActivity() {
 
         playerYoutube.initialize(YoutubeConfig.getAPIkey(), youtubePlayerInit)
     }
+
+    fun dadosIntent(){
+        var intent = intent
+        id = intent.getStringExtra("id")
+        description = intent.getStringExtra("description")
+        title = intent.getStringExtra("title")
+
+        txt_itemDescrVideoDetails.text = description
+        txt_itemTitle_videoDetails.text = title
+
+    }
+
+
+
+
 
 
 }

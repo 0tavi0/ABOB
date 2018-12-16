@@ -22,6 +22,7 @@ class VideosLista : AppCompatActivity(), VideosListaContrato.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_videos_lista)
 
+
         videoPresenter = VideosPresenter(this)
 
        videoPresenter.obterLista()

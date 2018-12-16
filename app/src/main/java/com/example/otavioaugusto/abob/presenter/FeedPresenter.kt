@@ -40,7 +40,7 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
             }
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0!!.exists()){
-                    listaFeed.clear()
+                   // listaFeed.clear()
                     for (feed in p0.children){
                         var feed = feed.getValue(Feed::class.java)
                         listaFeed.add(feed!!)

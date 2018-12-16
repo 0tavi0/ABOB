@@ -7,11 +7,12 @@
         android:layout_height="match_parent"
         tools:context=".view.VideosLista">
 
+
     <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
-            android:layout_height="0dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:id="@+id/recyclerVideos"/>
+            android:layout_height="0dp"
+            android:id="@+id/recyclerVideos"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 </android.support.constraint.ConstraintLayout>

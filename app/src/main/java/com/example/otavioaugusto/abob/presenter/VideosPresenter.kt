@@ -48,8 +48,9 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
                         var urlImagem = i.youtubeModel.thumbnails.thumbnailsHigh.urlImagem
                         var idVide = i.youtubeModel.video_id.urlIDvideos
                         var title = i.youtubeModel.title
+                        var description = i.youtubeModel.description
 
-                        var videoYoutube = VideoYoutube(urlImagem, idVide,title)
+                        var videoYoutube = VideoYoutube(urlImagem, idVide,title,description)
 
                         listaDadosYoutube.add(videoYoutube)
 
@@ -75,9 +76,12 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
 
         }
 
-        fun passarDadoIntent(id:String, contexto: Context){
+        fun passarDadoIntent(id:String, description:String, title:String, contexto: Context){
             val intent = Intent(contexto, VideoDetails::class.java)
             intent.putExtra("id", id)
+            intent.putExtra("description",description)
+            intent.putExtra("title", title)
+
             contexto.startActivity(intent)
         }
     }

@@ -29,6 +29,9 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
     var listaDadosYoutube: MutableList<VideoYoutube> = ArrayList()
 
     override fun obterLista() {
+
+        view.showProgressBar()
+
         var call = RetrofitService
             .retrofit.create(ApiInterface::class.java)
             .getYoutubeData(PLAYLIST_ID,GOOGLE_YOUTUBE_API_KEY)
@@ -56,6 +59,7 @@ class VideosPresenter(var view : VideosListaContrato.View):VideosListaContrato.P
 
                         view.mostrarLista(listaDadosYoutube)
 
+                        view.hideProgressBar()
                     }
 
                 }else{

@@ -32,6 +32,8 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
 
     override fun obterFeedFireabase() {
 
+        view.showProgressBar()
+
         listaFeed = ArrayList()
         val ref = FirebaseDatabase.getInstance().getReference("feed")
         ref.addValueEventListener(object : ValueEventListener{
@@ -45,6 +47,8 @@ class FeedPresenter(var view : FeedContrato.View) : FeedContrato.FeedPresenter {
                         var feed = feed.getValue(Feed::class.java)
                         listaFeed.add(feed!!)
                         view.mostrarListaFirebase(listaFeed)
+
+                        view.hideProgressBar()
                     }
                 }
 

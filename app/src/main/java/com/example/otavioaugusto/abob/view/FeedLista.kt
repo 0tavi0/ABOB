@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.adapters.FeedAdapter
@@ -14,7 +15,8 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_feed.*
 
 class FeedLista : AppCompatActivity(), FeedContrato.View {
-    
+
+
     lateinit var feedPresenter: FeedContrato.FeedPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +38,16 @@ class FeedLista : AppCompatActivity(), FeedContrato.View {
         val adapter = FeedAdapter(lista, this)
         recycler.adapter = adapter
 
-        Log.e("lista","${lista.size}")
+    }
+
+    override fun showProgressBar() {
+
+        progressFeed.visibility = View.VISIBLE
+
+    }
+
+    override fun hideProgressBar() {
+        progressFeed.visibility = View.INVISIBLE
     }
 
 

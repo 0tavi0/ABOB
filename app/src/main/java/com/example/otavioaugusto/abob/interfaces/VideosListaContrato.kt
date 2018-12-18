@@ -7,6 +7,8 @@ interface VideosListaContrato {
 
     interface View{
         fun mostrarLista(listaYoutubeModel: List<VideoYoutube>)
+        fun showProgressBar()
+        fun hideProgressBar()
 
     }
 

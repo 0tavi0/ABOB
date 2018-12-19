@@ -21,5 +21,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, VideosLista::class.java)
             startActivity(intent)
         }
+
+        btnEmail.setOnClickListener {
+            val intent = Intent(this, EmailActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

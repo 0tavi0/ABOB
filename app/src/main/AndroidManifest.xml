@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".view.EmailActivity">
         </activity>
+        <activity android:name=".view.AlarmMedicamentoActivity">
+        </activity>
     </application>
 
 </manifest>

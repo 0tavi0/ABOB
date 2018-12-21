@@ -26,5 +26,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, EmailActivity::class.java)
             startActivity(intent)
         }
+
+        btnAlarme.setOnClickListener {
+            val intent = Intent(this, AlarmMedicamentoActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

@@ -29,34 +29,23 @@ class AlarmMedicamentoActivity : AppCompatActivity() {
         workManager = WorkManager.getInstance()!!
 
 
-        btnAlarme.setOnClickListener {
-
-
-            setupPeriodicWorker()
-        }
-
-        btnCancelar.setOnClickListener {
-
-            val myWorkId = periodicWorkRequest.getId()
-
-            workManager.cancelWorkById(myWorkId)
-            Log.e("cancelado", "" + myWorkId)
-            txtStatus.text = "Desativado"
-
+        switch1.setOnClickListener {
+            if (switch1.isChecked){
+                AlarmMedicamento()
+                txtStatus.text = "Ativado"
+            }else{
+                cancelarAlarm()
+                txtStatus.text = "Desativado"
+            }
 
         }
 
-        btnStatus.setOnClickListener {
-            Log.e("status", "sdsd")
 
-
-
-        }
 
 
     }
 
-    fun setupPeriodicWorker() {
+    fun AlarmMedicamento() {
 
 
         val calendar = Calendar.getInstance()
@@ -99,37 +88,27 @@ class AlarmMedicamentoActivity : AppCompatActivity() {
 
     fun getStatus(id:UUID) {
         WorkManager.getInstance().getStatusById(id)?.apply {
-           // observeForever(observer)
             observeForever (observer)
         }
-        //println("111===========${WorkManager.getInstance().getStatusesByTag(id)}====${WorkManager.getInstance().getStatusesByTag(id)?.value?.size}")
     }
     val observer=object :android.arch.lifecycle.Observer<WorkStatus> {
         override fun onChanged(t: WorkStatus?) {
             Log.e("State", ""+ t!!.state)
 
             if (t!!.state == State.ENQUEUED || t!!.state == State.RUNNING){
-                txtStatus.text = "Ativado"
+                Log.e("State", "ativado")
+
             }
         }
 
-//        override fun onChanged(t: MutableList<WorkStatus>?) {
-//            println("00=================${t?.size}")
-//            (0 until (t?.size?:0)).forEach {
-//                var workstaus = t!![it]
-//
-//                Log.e("State", ""+workstaus.state)
-//
-//                if (workstaus.state == State.ENQUEUED){
-//                    Log.e("Medicamento não ativado","true" )
-//                    txtStatus.text = "Desativado"
-//                }
-//
-//                println("${it}==============${workstaus.id}====${workstaus.state}//${workstaus.state.isFinished}")
-//            }
-//        }
     }
 
+    fun cancelarAlarm(){
+        val myWorkId = periodicWorkRequest.getId()
+
+        workManager.cancelWorkById(myWorkId)
+
+    }
 
 
     }

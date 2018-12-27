@@ -1,11 +1,14 @@
 package com.example.otavioaugusto.abob.view
 
+import android.app.PendingIntent
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.interfaces.EmailContrato
 import com.example.otavioaugusto.abob.presenter.EmailPresenter
+import com.example.otavioaugusto.abob.utils.Notification
 import kotlinx.android.synthetic.main.activity_email.*
 
 class EmailActivity : AppCompatActivity(), EmailContrato.View {
@@ -26,6 +29,8 @@ class EmailActivity : AppCompatActivity(), EmailContrato.View {
             var mensagem = edtMensagem.text.toString().trim()
 
             presenter.enviarEmail(assunto,mensagem)
+
+
 
 
         }

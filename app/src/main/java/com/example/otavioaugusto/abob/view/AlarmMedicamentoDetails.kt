@@ -13,6 +13,15 @@ class AlarmMedicamentoDetails : AppCompatActivity() {
         setContentView(R.layout.activity_alarm_medicamento_details)
 
 
+        var intent = intent
+        var hora = intent.getStringExtra("hora")
+        var data = intent.getStringExtra("data")
+
+        txtData.text = data
+        txtHora.text = hora
+
+
+
         Glide.with(this)
             .asGif()
             .load(R.drawable.gif)

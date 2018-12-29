@@ -29,12 +29,15 @@ class AlarmeMedicamentoWorker(ctx: Context, params: WorkerParameters) : Worker(c
             Notification.mostrarNotificacao(applicationContext, 1, "Aveloz", "Hora te tomar o medicamenyo", pendingIntent)
 
             val cal = Calendar.getInstance()
-            Log.e("Data", ""+(SimpleDateFormat("H : m").format(cal.time)))
-            Log.e("Data", ""+(SimpleDateFormat("M/d - H : m").format(cal.time)))
+            var hora = (SimpleDateFormat("H:mm").format(cal.time))
+            var data = (SimpleDateFormat("d/M").format(cal.time))
+            Log.e("Data", ""+hora)
+            Log.e("Data", ""+data)
 
 
             var intent1  = Intent(applicationContext, AlarmMedicamentoDetails::class.java)
-//        intent1.putExtra("hora", cal.time)
+            intent1.putExtra("hora", hora)
+            intent1.putExtra("data", data)
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             applicationContext.startActivity(intent1)
 

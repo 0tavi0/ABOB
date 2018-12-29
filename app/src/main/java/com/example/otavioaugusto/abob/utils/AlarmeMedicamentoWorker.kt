@@ -19,9 +19,24 @@ class AlarmeMedicamentoWorker(ctx: Context, params: WorkerParameters) : Worker(c
 
 
         return try {
+
+            val intent = Intent(applicationContext, AlarmMedicamentoActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            val pendingIntent: PendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
+
+
+            Notification.mostrarNotificacao(applicationContext, 1, "Aveloz", "Hora te tomar o medicamenyo", pendingIntent)
+
             val cal = Calendar.getInstance()
             Log.e("Data", ""+(SimpleDateFormat("H : m").format(cal.time)))
-            Log.e("Data", ""+(SimpleDateFormat("M/d - H : mm").format(cal.time)))
+            Log.e("Data", ""+(SimpleDateFormat("M/d - H : m").format(cal.time)))
+
+
+            var intent1  = Intent(applicationContext, AlarmMedicamentoDetails::class.java)
+//        intent1.putExtra("hora", cal.time)
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            applicationContext.startActivity(intent1)
 
             Log.e("Medicametno","Hora te tomar" + cal.time)
 

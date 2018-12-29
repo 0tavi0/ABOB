@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 class AlarmMedicamentoActivity : AppCompatActivity() {
 
     private lateinit var workManager: WorkManager
-    lateinit var periodicWorkRequest: PeriodicWorkRequest
+    var periodicWorkRequest: PeriodicWorkRequest? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,17 +29,13 @@ class AlarmMedicamentoActivity : AppCompatActivity() {
 
         workManager = WorkManager.getInstance()
 
-
-
         var status = Hawk.get<Boolean>("status")
-
 
         Log.e("StatusOncreate", ""+status)
 
         if (status != null){
             txtStatus.text = "Ativado"
             switch1.setChecked(true)
-
 
         }else{
             txtStatus.text = "Desativado"
@@ -52,52 +48,41 @@ class AlarmMedicamentoActivity : AppCompatActivity() {
                 txtStatus.text = "Ativado"
 
             }else{
+
                 cancelarAlarm()
                 txtStatus.text = "Desativado"
             }
 
         }
 
-        btnstatus.setOnClickListener {
-            val myWorkId = periodicWorkRequest.getId()
-
-            getStatus(myWorkId)
-
-        }
-
-
-
     }
 
     fun AlarmMedicamento() {
-
 
         val calendar = Calendar.getInstance()
 
         val work = PeriodicWorkRequest.Builder(
             AlarmeMedicamentoWorker::class.java,
-            15, TimeUnit.MINUTES
+            8, TimeUnit.HOURS
         )
-
 
         periodicWorkRequest = work.build()
 
-        workManager.enqueue(periodicWorkRequest)
+        workManager.enqueue(periodicWorkRequest!!)
 
-        val myWorkId = periodicWorkRequest.getId()
+        val myWorkId = periodicWorkRequest!!.getId()
 
         getStatus(myWorkId)
 
 
         Log.e("agendado", "" + calendar.time)
-        Log.e("agendado", "ID : __" + myWorkId)
-
+        Log.e("agendado", "ID :" + myWorkId)
 
 
     }
 
     fun cancelarAlarm(){
-        val myWorkId = periodicWorkRequest.getId()
+        val myWorkId = periodicWorkRequest?.getId()
         workManager.cancelAllWork()
         Hawk.delete("status")
         Log.e("cancelado", "ID : __" + myWorkId)
@@ -107,14 +92,12 @@ class AlarmMedicamentoActivity : AppCompatActivity() {
 
     fun getStatus(id: UUID): LiveData<WorkInfo> {
         val observer = Observer<WorkInfo> { t ->
-
             if (t!!.state == WorkInfo.State.ENQUEUED || t!!.state == WorkInfo.State.RUNNING) {
                 Log.e("Stated", "ativado")
 
                 Hawk.put("status", true)
 
             }
-
 
         }
 
@@ -132,7 +115,6 @@ class AlarmMedicamentoActivity : AppCompatActivity() {
 
 
 
-//E/Medicametno: Hora te tomarFri Dec 28 21:06:48 GMT-03:00 2018
 
 
 

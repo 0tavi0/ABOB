@@ -27,7 +27,7 @@ class AlarmMedicamentoDetails : AppCompatActivity() {
             .load(R.drawable.gif)
             .into(imgGIF)
 
-        btn.setOnClickListener {
+        fab.setOnClickListener { view ->
             finish()
         }
     }

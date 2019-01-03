@@ -11,6 +11,7 @@ import com.example.otavioaugusto.abob.adapters.FeedAdapter
 import com.example.otavioaugusto.abob.interfaces.FeedContrato
 import com.example.otavioaugusto.abob.model.Feed
 import com.example.otavioaugusto.abob.presenter.FeedPresenter
+import com.example.otavioaugusto.abob.utils.VerificarConexao
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_feed.*
 
@@ -22,6 +23,14 @@ class FeedLista : AppCompatActivity(), FeedContrato.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed_lista)
+
+        if (VerificarConexao.isNetworkConnected(this)){
+            Log.e("Conectado","true")
+        }else{
+            VerificarConexao.alerta("Opss..", "Você não está conectado! Favor conectar a internet",this)
+            Log.e("Não Conectado","false")
+
+        }
 
         feedPresenter = FeedPresenter(this)
         feedPresenter.obterFeedFireabase()

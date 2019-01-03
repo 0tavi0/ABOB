@@ -12,6 +12,7 @@ import com.example.otavioaugusto.abob.interfaces.VideosListaContrato
 import com.example.otavioaugusto.abob.model.VideoYoutube
 import com.example.otavioaugusto.abob.model.YoutubeDataModel
 import com.example.otavioaugusto.abob.presenter.VideosPresenter
+import com.example.otavioaugusto.abob.utils.VerificarConexao
 import kotlinx.android.synthetic.main.activity_videos_lista.*
 
 class VideosLista : AppCompatActivity(), VideosListaContrato.View {
@@ -24,10 +25,17 @@ class VideosLista : AppCompatActivity(), VideosListaContrato.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_videos_lista)
 
+        if (VerificarConexao.isNetworkConnected(this)){
+            Log.e("Conectado","true")
+        }else{
+            VerificarConexao.alerta("Opss..", "Você não está conectado! Favor conectar a internet",this)
+            Log.e("Não Conectado","false")
+
+        }
 
         videoPresenter = VideosPresenter(this)
 
-       videoPresenter.obterLista()
+        videoPresenter.obterLista()
         initRecyler()
 
     }

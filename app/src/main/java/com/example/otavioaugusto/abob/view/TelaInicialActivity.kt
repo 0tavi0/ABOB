@@ -12,17 +12,21 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.utils.VerificarConexao
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.app_bar_main2.*
 
 class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    var mAuth: FirebaseAuth? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         setSupportActionBar(toolbar)
 
+        mAuth = FirebaseAuth.getInstance()
 
         btnFeed.setOnClickListener {
             val intent = Intent(this, FeedLista::class.java)
@@ -89,13 +93,19 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             R.id.nav_slideshow -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_historico -> {
+
+                var intent  = Intent(this, HistoricoActivity::class.java)
+                startActivity(intent)
 
             }
             R.id.nav_share -> {
 
             }
-            R.id.nav_send -> {
+            R.id.nav_sair -> {
+
+                mAuth?.signOut()
+
 
             }
         }

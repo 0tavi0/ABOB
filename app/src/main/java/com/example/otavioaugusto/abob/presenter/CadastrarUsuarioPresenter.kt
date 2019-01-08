@@ -3,14 +3,18 @@ package com.example.otavioaugusto.abob.presenter
 import android.content.Context
 import com.example.otavioaugusto.abob.interfaces.CadastrarUsuarioContrato
 import android.util.Log
+import com.example.otavioaugusto.abob.utils.FirebaseDAO
 import com.google.firebase.auth.*
+import com.google.firebase.database.FirebaseDatabase
 
 
 class CadastrarUsuarioPresenter(var view:CadastrarUsuarioContrato.View, context: Context) : CadastrarUsuarioContrato.Presenter {
 
 
 
-    override fun criarUsuario(email: String, senha: String, mAuth:FirebaseAuth) {
+
+
+    override fun criarUsuario(email: String, senha: String, mAuth:FirebaseAuth, nome: String){
         view.showProgressBar()
 
         mAuth.createUserWithEmailAndPassword(email, senha)
@@ -18,16 +22,27 @@ class CadastrarUsuarioPresenter(var view:CadastrarUsuarioContrato.View, context:
 
 
                 if (task.isSuccessful) {
-                    Log.e("sucesso","dsds")
+
+                   var user =  mAuth.currentUser
+
+                        //view.recuperarUsuarioID(user!!)
+
+                    FirebaseDAO.salvarUsuarioFirebase(user!!.email!!,user.uid, nome)
+
+
+
+                    Log.e("sucesso---"+user!!.uid,"dsds"+user.email)
                     //  signUpView?.onSuccess()
                 } else {
                     Log.e("nao deu certo","dsds")
 
                     Excecao(task.exception)
 
+
                 }
 
                 view.hideProgressBar()
+
             }
 
 
@@ -49,11 +64,11 @@ class CadastrarUsuarioPresenter(var view:CadastrarUsuarioContrato.View, context:
     }
 
 
-    override fun verificarVazio(email: String, senha: String):Boolean {
+    override fun verificarVazio(email: String, senha: String, nome:String):Boolean {
 
         var isValid = true
 
-        if (email.isNullOrEmpty() || senha.isNullOrEmpty()) {
+        if (email.isNullOrEmpty() || senha.isNullOrEmpty() || nome.isNullOrEmpty()) {
             isValid = false
             view.mensagemErro("Campo vazio")
         }
@@ -63,6 +78,8 @@ class CadastrarUsuarioPresenter(var view:CadastrarUsuarioContrato.View, context:
 
 
     }
+
+
 
 
 }

@@ -19,8 +19,10 @@ import com.google.firebase.auth.FirebaseUser
 class CadastrarUsuarioActivity : AppCompatActivity(), CadastrarUsuarioContrato.View {
 
 
+
     lateinit var presenter : CadastrarUsuarioContrato.Presenter
      var mAuth: FirebaseAuth? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +39,16 @@ class CadastrarUsuarioActivity : AppCompatActivity(), CadastrarUsuarioContrato.V
 
             var email = edtEmail.text.toString().trim()
             var senha = edtSenha.text.toString().trim()
+            var nome = edtNome.text.toString()
 
-          if ( presenter.verificarVazio(email, senha)){
+          if ( presenter.verificarVazio(email, senha, nome)){
 
-              presenter.criarUsuario(email, senha, mAuth!!)
+              presenter.criarUsuario(email, senha, mAuth!!,nome)
+
+
+
+
+
 
               val i = Intent(this, TelaInicialActivity::class.java)
               startActivity(i)

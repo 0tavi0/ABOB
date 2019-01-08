@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.interfaces.LoginContrato
 import com.example.otavioaugusto.abob.presenter.LoginPresenter
+import com.example.otavioaugusto.abob.utils.FirebaseDAO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
@@ -28,8 +29,7 @@ class LoginActivity : AppCompatActivity(), LoginContrato.View {
             val i = Intent(this, CadastrarUsuarioActivity::class.java)
             startActivity(i)
         }
-
-        btnLogin.setOnClickListener {
+     btnLogin.setOnClickListener {
             val email = edtEmail.text.toString().trim()
             val senha = edtSenha.text.toString().trim()
 

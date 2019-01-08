@@ -9,8 +9,10 @@ import android.widget.Toast
 import com.example.otavioaugusto.abob.R
 import com.example.otavioaugusto.abob.interfaces.EmailContrato
 import com.example.otavioaugusto.abob.presenter.EmailPresenter
+import com.example.otavioaugusto.abob.utils.FirebaseDAO
 import com.example.otavioaugusto.abob.utils.Notification
 import com.example.otavioaugusto.abob.utils.VerificarConexao
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_email.*
 
 class EmailActivity : AppCompatActivity(), EmailContrato.View {

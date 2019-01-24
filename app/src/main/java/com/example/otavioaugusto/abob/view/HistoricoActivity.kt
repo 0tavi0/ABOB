@@ -1,10 +1,12 @@
 package com.example.otavioaugusto.abob.view
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.otavioaugusto.abob.R
+import com.example.otavioaugusto.abob.model.DataHistoricoMedicamento
 import com.example.otavioaugusto.abob.utils.FirebaseDAO
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_historico.*
@@ -14,7 +16,7 @@ import java.util.*
 class HistoricoActivity : AppCompatActivity() {
 
     var mAuth: FirebaseAuth? = null
-    var listaDatas: ArrayList<String>?=null
+    var listaHistorico: ArrayList<DataHistoricoMedicamento>?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,21 +24,40 @@ class HistoricoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_historico)
         mAuth = FirebaseAuth.getInstance()
 
-        listaDatas = ArrayList()
+        listaHistorico = ArrayList()
+
+recuperarHistorico()
 
         btnPegarMedicamento.setOnClickListener {
             val currentUser = mAuth?.getCurrentUser()
 
-
             val cal = Calendar.getInstance()
-            var data = (SimpleDateFormat("H:mm:ss").format(cal.time))
+            val ano = cal.get(Calendar.YEAR)
+            val mes = cal.get(Calendar.MONTH)
+            val dia = cal.get(Calendar.DAY_OF_MONTH)
 
-            listaDatas!!.add(data)
+            val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
 
-            if (currentUser != null) {
-                FirebaseDAO.salvarHistorico(currentUser.uid, listaDatas!!)
+                val quantidade = edtQuantidade.text.toString()
+                var data = "${dayOfMonth}/${month + 1}/${year}"
 
-            }
+                val dataHistoricoMedicamento = DataHistoricoMedicamento()
+                dataHistoricoMedicamento.data = data
+                dataHistoricoMedicamento.quantidade = quantidade.toInt()
+
+                listaHistorico!!.add(dataHistoricoMedicamento)
+
+
+                if (currentUser != null) {
+
+                    FirebaseDAO.salvarHistorico(currentUser.uid,listaHistorico!!)
+
+                }
+
+            }, ano, mes, dia)
+
+            datePicker.show()
+
         }
 
     }
@@ -55,6 +76,19 @@ class HistoricoActivity : AppCompatActivity() {
 
 
 
+
+
+    }
+
+    fun recuperarHistorico(){
+        val currentUser = mAuth?.getCurrentUser()
+        Log.e("fora", "${currentUser}")
+
+        if (currentUser!=null){
+            Log.e("dentro", "${currentUser}")
+            FirebaseDAO.recuperarHistorico(currentUser!!.uid)
+
+        }
 
     }
 }

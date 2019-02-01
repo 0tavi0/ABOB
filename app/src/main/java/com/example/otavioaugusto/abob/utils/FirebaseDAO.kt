@@ -24,62 +24,23 @@ class FirebaseDAO {
             myRef.child(id).setValue(usuario)
         }
 
-       fun salvarHistorico(id: String, datas:ArrayList<DataHistoricoMedicamento>){
-           val database = FirebaseDatabase.getInstance()
-           val myRef = database.getReference("usuarios/" )
-           val medicamento =  Medicamento(datas)
+//       fun salvarHistorico(id: String, datas:ArrayList<DataHistoricoMedicamento>){
+//           val database = FirebaseDatabase.getInstance()
+//           val myRef = database.getReference("usuarios/" )
+//           val medicamento =  Medicamento(datas)
+//
+//           myRef.child(id).child("HistoricoPegarMedicamento").setValue(datas)
+//
+//       }
 
-           myRef.child(id).child("HistoricoPegarMedicamento").setValue(medicamento)
-
-       }
-
-        fun recuperarHistorico(id:String){
-
+        fun salvarHistorico(id: String, data: String, datas:DataHistoricoMedicamento){
             val database = FirebaseDatabase.getInstance()
-            val myRef = database.getReference("usuarios/${id}/HistoricoPegarMedicamento/datas" )
+            val myRef = database.getReference("usuarios/" )
+            //val medicamento =  Medicamento(datas)
 
-            val messageListener = object : ValueEventListener {
+            myRef.child(id).child("datas").child(data).setValue(datas)
 
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        val datas = dataSnapshot.children
-                        for (i in datas){
-
-                            var lista = arrayListOf<DataHistoricoMedicamento>()
-
-                            val data = i.child("data").getValue(String::class.java)
-                            val quantidade = i.child("quantidade").getValue(Int::class.java)
-
-                            val dataHistoricoMedicamento = DataHistoricoMedicamento()
-                            dataHistoricoMedicamento.data = data.toString()
-                            dataHistoricoMedicamento.quantidade = quantidade!!.toInt()
-                            lista.add(dataHistoricoMedicamento)
-
-
-
-                               Log.e("Lista ", "${lista}")
-
-
-
-                        }
-
-
-
-
-
-
-
-//                        Log.e("Quantidade", "${data}")
-
-
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
-            }
-
-            myRef!!.addValueEventListener(messageListener)
         }
     }
 }
+

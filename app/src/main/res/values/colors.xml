@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#00574b</color>
     <color name="colorAccent">#D81B60</color>
     <color name="backgraoundTextview">#51686868</color>
+    <color name="bg_historico">#E0E0E0</color>
+    <color name="bg_btnHistorico">#C6F68D</color>
 
 </resources>

@@ -24,15 +24,6 @@ class FirebaseDAO {
             myRef.child(id).setValue(usuario)
         }
 
-//       fun salvarHistorico(id: String, datas:ArrayList<DataHistoricoMedicamento>){
-//           val database = FirebaseDatabase.getInstance()
-//           val myRef = database.getReference("usuarios/" )
-//           val medicamento =  Medicamento(datas)
-//
-//           myRef.child(id).child("HistoricoPegarMedicamento").setValue(datas)
-//
-//       }
-
         fun salvarHistorico(id: String, data: String, datas:DataHistoricoMedicamento){
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("usuarios/" )
@@ -41,6 +32,8 @@ class FirebaseDAO {
             myRef.child(id).child("datas").child(data).setValue(datas)
 
         }
+
+
     }
 }
 

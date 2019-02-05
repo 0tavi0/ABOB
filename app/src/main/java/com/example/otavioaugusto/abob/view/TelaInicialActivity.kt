@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.app_bar_main2.*
+import kotlinx.android.synthetic.main.nav_header_main2.view.*
 
 class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var mAuth: FirebaseAuth? = null
@@ -25,6 +26,7 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         setSupportActionBar(toolbar)
+
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -55,7 +57,29 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val currentUser = mAuth?.getCurrentUser()
+
+        if (currentUser!=null) {
+
+            nav_view.getHeaderView(0).txtEmailNavView.text = mAuth!!.currentUser!!.email
+        }
+
     }
+
+    override fun onStart() {
+        super.onStart()
+
+        val currentUser = mAuth?.getCurrentUser()
+
+        if (currentUser!=null) {
+
+            nav_view.getHeaderView(0).txtEmailNavView.text = mAuth!!.currentUser!!.email
+        }
+
+    }
+
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -105,6 +129,8 @@ class TelaInicialActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             R.id.nav_sair -> {
 
                 mAuth?.signOut()
+
+                nav_view.getHeaderView(0).txtEmailNavView.text = getString(R.string.nav_header_subtitle)
 
 
             }

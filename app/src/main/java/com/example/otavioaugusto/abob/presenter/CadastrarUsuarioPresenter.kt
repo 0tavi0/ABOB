@@ -24,20 +24,10 @@ class CadastrarUsuarioPresenter(var view:CadastrarUsuarioContrato.View, context:
                 if (task.isSuccessful) {
 
                    var user =  mAuth.currentUser
-
-                        //view.recuperarUsuarioID(user!!)
-
                     FirebaseDAO.salvarUsuarioFirebase(user!!.email!!,user.uid, nome)
 
-
-
-                    Log.e("sucesso---"+user!!.uid,"dsds"+user.email)
-                    //  signUpView?.onSuccess()
                 } else {
-                    Log.e("nao deu certo","dsds")
-
                     Excecao(task.exception)
-
 
                 }
 

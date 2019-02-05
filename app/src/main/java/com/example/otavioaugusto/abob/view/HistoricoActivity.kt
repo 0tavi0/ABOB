@@ -29,6 +29,8 @@ class HistoricoActivity : AppCompatActivity(), HistoricoContrato.View {
         setContentView(R.layout.activity_historico)
         mAuth = FirebaseAuth.getInstance()
 
+
+
         listaHistorico = ArrayList()
         presenter = HistoricoPresenter(this)
 
@@ -64,7 +66,7 @@ class HistoricoActivity : AppCompatActivity(), HistoricoContrato.View {
                 if (currentUser != null) {
 
                     FirebaseDAO.salvarHistorico(currentUser.uid,dataChild.toString(),dataHistoricoMedicamento!!)
-
+                    finish()
                 }
 
 
@@ -74,6 +76,7 @@ class HistoricoActivity : AppCompatActivity(), HistoricoContrato.View {
 
 
         }
+
 
 
     }
